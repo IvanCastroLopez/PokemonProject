@@ -26,7 +26,9 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	if is_moving == false:
+	if player_state == PlayerState.TURNING:
+		return
+	elif is_moving == false:
 		process_player_input()
 	elif input_direction != Vector2.ZERO:
 		anim_state.travel("Walk")
@@ -44,12 +46,37 @@ func process_player_input():
 	if input_direction != Vector2.ZERO:
 		anim_tree.set("parameters/Idle/blend_position", input_direction)
 		anim_tree.set("parameters/Walk/blend_position", input_direction)
+		anim_tree.set("parameters/Turn/blend_position", input_direction)
+		
+		if need_to_turn():
+			player_state = PlayerState.TURNING
+			anim_state.travel("Turn")
+		else:
+			initial_position = position
+			is_moving = true
+		
 		initial_position = position
 		is_moving = true
 	else:
 		anim_state.travel("Idle")
 	
-	
+func need_to_turn():
+	var new_facing_direction
+	if input_direction.x < 0:
+		new_facing_direction = FacingDirection.LEFT
+	elif input_direction.x > 0:
+		new_facing_direction = FacingDirection.RIGHT
+	elif input_direction.y < 0:
+		new_facing_direction = FacingDirection.UP
+	elif input_direction.y > 0:
+		new_facing_direction = FacingDirection.DOWN
+		
+	if facing_direction != new_facing_direction:
+		facing_direction = new_facing_direction
+		return true
+	facing_direction = new_facing_direction
+	return false
+
 func move(delta):
 	percent_moved_to_next_tile += walk_speed * delta
 	if percent_moved_to_next_tile >= 1.0:
