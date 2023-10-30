@@ -77,6 +77,9 @@ func need_to_turn():
 	facing_direction = new_facing_direction
 	return false
 
+func finished_turning():
+	player_state = PlayerState.IDLE
+
 func move(delta):
 	percent_moved_to_next_tile += walk_speed * delta
 	if percent_moved_to_next_tile >= 1.0:
