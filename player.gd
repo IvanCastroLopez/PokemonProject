@@ -7,6 +7,13 @@ const TILE_SIZE = 16
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
 
+
+enum PlayerState { IDLE, TURNING, WALKING }
+enum FacingDirection { LEFT, RIGHT, UP, DOWN }
+
+var player_state = PlayerState.IDLE
+var facing_direction = FacingDirection.DOWN
+
 var initial_position = Vector2(0,0)
 var input_direction = Vector2(0,0)
 var is_moving = false
