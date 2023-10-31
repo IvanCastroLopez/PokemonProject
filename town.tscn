@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://e8wr2kwn8sh2"]
+[gd_scene load_steps=10 format=3 uid="uid://e8wr2kwn8sh2"]
 
 [ext_resource type="PackedScene" uid="uid://cjrwq0hgk4y6k" path="res://player.tscn" id="1_cc8i3"]
 [ext_resource type="Texture2D" uid="uid://bes7tpkcifetp" path="res://Assets/Tilesets/grass1_tileset.png" id="1_o5wgj"]
 [ext_resource type="Texture2D" uid="uid://cvuq2qmv6qx2d" path="res://Assets/Tilesets/Water1_tileset.png" id="2_3mu7v"]
 [ext_resource type="Texture2D" uid="uid://c6mb1ldv8wqka" path="res://Assets/Tilesets/fence1_tileset.png" id="3_h32q4"]
+[ext_resource type="PackedScene" uid="uid://6s1cx5q1wr4e" path="res://tree.tscn" id="5_mit43"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5pp8i"]
 texture = ExtResource("1_o5wgj")
@@ -416,4 +417,4 @@ layer_0/tile_data = PackedInt32Array(0, 196610, 3, 65536, 131074, 0, 131072, 2, 
 
 [node name="Player" parent="." instance=ExtResource("1_cc8i3")]
 
-[node name="Tree" type="StaticBody2D" parent="."]
+[node name="Tree" parent="." instance=ExtResource("5_mit43")]
