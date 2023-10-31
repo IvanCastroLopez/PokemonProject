@@ -49,9 +49,10 @@ func process_player_input():
 #	if input_direction.x == 0:
 #		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 
+
 	#New Movement
 	# Get input direction from directional key input stack
-	if direction_keys.back() == null:
+	if direction_keys.size() == 0:
 		input_direction = Vector2.ZERO
 	else:
 		var key = direction_keys.back()
