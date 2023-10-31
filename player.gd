@@ -10,6 +10,7 @@ const TILE_SIZE = 16
 @onready var anim_state = anim_tree.get("parameters/playback")
 @onready var ray = $RayCast2D
 
+var direction_keys = []
 
 enum PlayerState { IDLE, TURNING, WALKING }
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
@@ -41,10 +42,34 @@ func _physics_process(delta):
 		is_moving = false
 
 func process_player_input():
-	if input_direction.y == 0:
-		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	
+#	# Old movement
+#	if input_direction.y == 0:
+#		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+#	if input_direction.x == 0:
+#		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+
+	#New Movement
+	# Get input direction from directional key input stack
+	if direction_keys.back() == null:
+		input_direction = Vector2.ZERO
+	else:
+		var key = direction_keys.back()
+		if Input.is_action_pressed(key):
+			if key == "ui_right":
+				input_direction.x = 1
+				input_direction.y = 0
+			elif key == "ui_left":
+				input_direction.x = -1
+				input_direction.y = 0
+			elif key == "ui_down":
+				input_direction.x = 0
+				input_direction.y = 1
+			elif key == "ui_up":
+				input_direction.x = 0
+				input_direction.y = -1
+			else:
+				input_direction = Vector2.ZERO
 
 	if input_direction != Vector2.ZERO:
 		anim_tree.set("parameters/Idle/blend_position", input_direction)
@@ -97,3 +122,24 @@ func move(delta):
 			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
 	else:
 		is_moving = false
+		
+func _process(delta):
+	# Store direction keys in a "stack", ordered by when they're pressed
+	if Input.is_action_just_pressed("ui_right"):
+		direction_keys.push_back("ui_right")
+	elif Input.is_action_just_released("ui_right"):
+		direction_keys.erase("ui_right")
+	if Input.is_action_just_pressed("ui_left"):
+		direction_keys.push_back("ui_left")
+	elif Input.is_action_just_released("ui_left"):
+		direction_keys.erase("ui_left")
+	if Input.is_action_just_pressed("ui_down"):
+		direction_keys.push_back("ui_down")
+	elif Input.is_action_just_released("ui_down"):
+		direction_keys.erase("ui_down")
+	if Input.is_action_just_pressed("ui_up"):
+		direction_keys.push_back("ui_up")
+	elif Input.is_action_just_released("ui_up"):
+		direction_keys.erase("ui_up")
+	if !Input.is_action_pressed("ui_right") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_up"):
+		direction_keys.clear()
