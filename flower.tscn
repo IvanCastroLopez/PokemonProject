@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://wf61yoqe7rfe"]
+[gd_scene load_steps=9 format=3 uid="uid://wf61yoqe7rfe"]
 
 [ext_resource type="Texture2D" uid="uid://y5q5aymib814" path="res://Assets/Flowers/red_flower.png" id="1_ncn47"]
+[ext_resource type="Script" path="res://flower.gd" id="2_eukan"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rd3gy"]
 atlas = ExtResource("1_ncn47")
@@ -47,4 +48,6 @@ animations = [{
 
 [node name="Flower" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_jukwt")
-frame_progress = 0.342879
+frame_progress = 0.96813
+centered = false
+script = ExtResource("2_eukan")
