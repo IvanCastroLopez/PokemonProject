@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://cjrwq0hgk4y6k"]
 
-[ext_resource type="Texture2D" uid="uid://786bm65rjpxl" path="res://Assets/Player/Male_Spritesheet.png" id="1_5dbjh"]
+[ext_resource type="Texture2D" uid="uid://b33cgxtegtv6g" path="res://Assets/Player/Male_Spritesheet.png" id="1_5dbjh"]
 [ext_resource type="Script" path="res://player.gd" id="1_sdfw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5w8of"]
