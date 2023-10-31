@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal player_moving_signal
+signal player_steppedd_signal
 
 @export var walk_speed = 4.0
 const TILE_SIZE = 16
