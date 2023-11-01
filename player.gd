@@ -41,6 +41,22 @@ func _physics_process(delta):
 		anim_state.travel("Idle")
 		is_moving = false
 
+
+func _process(delta: float) -> void:
+	direction_storage() # activates the function through _process
+
+func direction_storage():
+	var directions = ["ui_right", "ui_left", "ui_down", "ui_up"]
+	
+	for dir in directions:
+		if Input.is_action_just_pressed(dir):
+			direction_keys.push_back(dir)
+		elif Input.is_action_just_released(dir):
+			direction_keys.erase(dir)
+			
+	if direction_keys.size() == 0:
+		direction_keys.clear()
+
 func process_player_input():
 	#New Movement
 	var direction_map = {
@@ -100,27 +116,15 @@ func move(delta):
 	ray.force_raycast_update()
 	
 	if !ray.is_colliding():
+		if percent_moved_to_next_tile == 0:
+			emit_signal("player_moving_signal")
 		percent_moved_to_next_tile += walk_speed * delta
 		if percent_moved_to_next_tile >= 1.0:
-			position = initial_position + (TILE_SIZE * input_direction)
+			position = initial_position + (input_direction * TILE_SIZE)
 			percent_moved_to_next_tile = 0.0
 			is_moving = false
+			emit_signal("player_stopped_signal")
 		else:
-			position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+			position = initial_position + (input_direction * TILE_SIZE * percent_moved_to_next_tile)
 	else:
 		is_moving = false
-
-func _process(delta: float) -> void:
-	direction_storage() # activates the function through _process
-
-func direction_storage():
-	var directions = ["ui_right", "ui_left", "ui_down", "ui_up"]
-	
-	for dir in directions:
-		if Input.is_action_just_pressed(dir):
-			direction_keys.push_back(dir)
-		elif Input.is_action_just_released(dir):
-			direction_keys.erase(dir)
-			
-	if direction_keys.size() == 0:
-		direction_keys.clear()
