@@ -8,12 +8,13 @@ var player_inside: bool = false
 
 func _ready():
 	# Find the Player node in the common ancestor (Town Scene)
-	var player_node = %Player
+	var player_node = get_tree().get_root().get_node("Town/YSort/Player")
 	
 	# Connect to signals emitted by the Player node
 	if player_node:
-		player_node.player_moving_signal.connect("_player_exiting_grass")
-		player_node.player_stopped_signal.connect("_player_entered_grass")
+		player_node.connect_to_signal("player_moving_signal", self, "_player_exiting_grass")
+		player_node.connect_to_signal("player_stopped_signal", self, "_player_entered_grass")
+
 
 func _player_exiting_grass():
 	player_inside = false

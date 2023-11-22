@@ -42,7 +42,7 @@ func _physics_process(delta):
 		is_moving = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	direction_storage() # activates the function through _process
 
 func direction_storage():
