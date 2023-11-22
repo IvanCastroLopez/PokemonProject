@@ -6,14 +6,16 @@ var grass_overlay: TextureRect = null
 
 var player_inside: bool = false
 
+var player_node
+
 func _ready():
-	# Find the Player node in the common ancestor (Town Scene)
-	var player_node = get_tree().get_root().get_node("Town/YSort/Player")
+	# Find the Player node in the common ancestor
+	player_node = get_node("../../YSort/Player")
 	
 	# Connect to signals emitted by the Player node
 	if player_node:
-		player_node.connect_to_signal("player_moving_signal", self, "_player_exiting_grass")
-		player_node.connect_to_signal("player_stopped_signal", self, "_player_entered_grass")
+		player_node.player_moving_signal.connect(_player_exiting_grass)
+		player_node.player_stopped_signal.connect(_player_entered_grass)
 
 
 func _player_exiting_grass():
@@ -23,9 +25,10 @@ func _player_exiting_grass():
 	
 func _player_entered_grass():
 	if player_inside:
+		print("asasasas")
 		grass_overlay = TextureRect.new()
 		grass_overlay.texture = grass_overlay_texture
-		grass_overlay.rect_position = position
+		grass_overlay.set_position(player_node.position)
 		get_tree().current_scene.add_child(grass_overlay)
 
 func _on_area_2d_body_entered(body):

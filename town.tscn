@@ -464,10 +464,43 @@ frame_progress = 0.445574
 [node name="TallGrass" parent="Grasses" instance=ExtResource("4_q851h")]
 position = Vector2(128, -80)
 
+[node name="TallGrass2" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(128, -64)
+
+[node name="TallGrass3" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(144, -80)
+
+[node name="TallGrass4" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(144, -64)
+
+[node name="TallGrass5" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(160, -80)
+
+[node name="TallGrass6" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(160, -64)
+
+[node name="TallGrass7" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(176, -80)
+
+[node name="TallGrass8" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(176, -64)
+
+[node name="TallGrass9" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(192, -80)
+
+[node name="TallGrass10" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(192, -64)
+
+[node name="TallGrass11" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(208, -80)
+
+[node name="TallGrass12" parent="Grasses" instance=ExtResource("4_q851h")]
+position = Vector2(208, -64)
+
 [node name="YSort" type="CanvasGroup" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="YSort" instance=ExtResource("1_cc8i3")]
+[node name="Player" parent="YSort" groups=["Player"] instance=ExtResource("1_cc8i3")]
 unique_name_in_owner = true
 position = Vector2(80, 32)
 
