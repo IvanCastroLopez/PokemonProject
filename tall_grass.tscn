@@ -56,7 +56,7 @@ tracks/0/keys = {
 _data = {
 "Idle": SubResource("Animation_xyngx"),
 "RESET": SubResource("Animation_631qq"),
-"Steppedd": SubResource("Animation_d40jn")
+"Stepped": SubResource("Animation_d40jn")
 }
 
 [node name="TallGrass" type="Node2D"]
