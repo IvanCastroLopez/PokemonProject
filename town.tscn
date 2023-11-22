@@ -459,9 +459,9 @@ frame_progress = 0.29935
 position = Vector2(0, -128)
 frame_progress = 0.445574
 
-[node name="Grass" type="Node2D" parent="."]
+[node name="Grasses" type="Node2D" parent="."]
 
-[node name="TallGrass" parent="Grass" instance=ExtResource("4_q851h")]
+[node name="TallGrass" parent="Grasses" instance=ExtResource("4_q851h")]
 position = Vector2(128, -80)
 
 [node name="YSort" type="CanvasGroup" parent="."]
