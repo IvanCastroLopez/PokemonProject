@@ -20,12 +20,16 @@ func _ready():
 
 func _player_exiting_grass():
 	player_inside = false
+	# Remove the grass overlay if it exists
 	if is_instance_valid(grass_overlay):
 		grass_overlay.queue_free()
 	
 func _player_entered_grass():
 	if player_inside:
-		print("asasasas")
+		# Check if the grass overlay already exists
+		if is_instance_valid(grass_overlay):
+			grass_overlay.queue_free()
+			
 		grass_overlay = TextureRect.new()
 		grass_overlay.texture = grass_overlay_texture
 		grass_overlay.set_position(player_node.position)

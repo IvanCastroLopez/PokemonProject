@@ -128,4 +128,5 @@ func move(delta):
 			position = initial_position + (input_direction * TILE_SIZE * percent_moved_to_next_tile)
 	else:
 		is_moving = false
+		emit_signal("player_stopped_signal")
 		percent_moved_to_next_tile = 0.0 # Reset when colliding
