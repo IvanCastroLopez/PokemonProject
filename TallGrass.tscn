@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkf7quvm2vo54"]
 
-[ext_resource type="Script" path="res://tall_grass.gd" id="1_mn2fm"]
 [ext_resource type="Texture2D" uid="uid://dieaj6bpvy4eo" path="res://Assets/Grass/tall_grass.png" id="1_sqmr1"]
+[ext_resource type="Script" path="res://TallGrass.gd" id="1_uigsg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bve3"]
 size = Vector2(14, 14)
@@ -60,7 +60,7 @@ _data = {
 }
 
 [node name="TallGrass" type="Node2D"]
-script = ExtResource("1_mn2fm")
+script = ExtResource("1_uigsg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sqmr1")
