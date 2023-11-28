@@ -4,11 +4,13 @@ signal player_moving_signal
 signal player_stopped_signal
 
 @export var walk_speed = 4.0
+@export var jump_speed = 4.0
 const TILE_SIZE = 16
 
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
-@onready var ray = $RayCast2D
+@onready var ray = $BlockingRayCast2D
+@onready var ledge_ray = $LedgeRayCast2D
 
 var direction_keys = []
 
@@ -18,6 +20,7 @@ enum FacingDirection { LEFT, RIGHT, UP, DOWN }
 var player_state = PlayerState.IDLE
 var facing_direction = FacingDirection.DOWN
 
+var jumping_over_ledge: bool = false
 var initial_position = Vector2(0,0)
 var input_direction = Vector2(0,0)
 var is_moving = false
@@ -110,12 +113,25 @@ func need_to_turn():
 func finished_turning():
 	player_state = PlayerState.IDLE
 
+
 func move(delta):
 	var desired_step: Vector2 = input_direction * TILE_SIZE / 2
 	ray.target_position = desired_step
 	ray.force_raycast_update()
 	
-	if !ray.is_colliding():
+	ledge_ray.target_position = desired_step
+	ledge_ray.force_raycast_update()
+	
+	if ledge_ray.is_colliding() && input_direction == Vector2(0,1) or jumping_over_ledge:
+		percent_moved_to_next_tile += jump_speed * delta
+		if percent_moved_to_next_tile >= 2.0:
+			position = initial_position + (input_direction * TILE_SIZE * 2)
+			percent_moved_to_next_tile = 0.0
+			is_moving = false
+			jumping_over_ledge = false
+		else:
+			jumping_over_ledge = true
+	elif !ray.is_colliding():
 		if percent_moved_to_next_tile == 0:
 			emit_signal("player_moving_signal")
 		percent_moved_to_next_tile += walk_speed * delta

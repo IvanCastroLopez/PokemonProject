@@ -450,6 +450,7 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace2D_ysg0r")
 states/Walk/position = Vector2(641, 40)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 6
 script = ExtResource("1_8uke2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -479,6 +480,10 @@ parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="BlockingRayCast2D" type="RayCast2D" parent="."]
 position = Vector2(8, 8)
 target_position = Vector2(0, 16)
+collision_mask = 6
+
+[node name="LedgeRayCast2D" type="RayCast2D" parent="."]
+collision_mask = 4
